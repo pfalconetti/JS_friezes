@@ -12,10 +12,12 @@
         var ctx = can.getContext('2d');
         
         ctx.translate(50,50); // just to get it away from the edge
+
         
-        
-        var greenPart = ctx.createLinearGradient(0,0,0,100);
-        greenPart.addColorStop(0, 'palegreen');
+        //var greenPart = ctx.createLinearGradient(0,0,0,100);
+        var greenPart = ctx.createRadialGradient(75,50,5,90,60,100);
+        //greenPart.addColorStop(0, 'palegreen');
+        greenPart.addColorStop(0, 'red');
         greenPart.addColorStop(1, 'lightgray');
         
         var whitePart = ctx.createLinearGradient(0,0,0,100);
@@ -32,6 +34,10 @@
         ctx.rect(-width, -width, 50+width, 100 + width*2);
         ctx.clip();
         
+        /* Shadow left */
+        ctx.shadowBlur=20;
+        ctx.shadowColor="black";
+        
         // Then we draw the left half
         ctx.strokeStyle = greenPart;
         ctx.beginPath();
@@ -45,6 +51,10 @@
         ctx.beginPath();
         ctx.rect(50, -width, 50+width, 100 + width*2);
         ctx.clip();
+        
+        /* Shadow right */
+        ctx.shadowBlur=20;
+        ctx.shadowColor="black";
         
         // Then we draw the right half
         ctx.strokeStyle = whitePart;
