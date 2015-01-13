@@ -1,32 +1,58 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="myCanvas" width="578" height="250"></canvas>
+<head>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
     <script>
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var x = canvas.width / 2;
-      var y = canvas.height / 2;
-      var radius = 75;
-      var startAngle = 1.1 * Math.PI;
-      var endAngle = 1.9 * Math.PI;
-      var counterClockwise = false;
-
-      context.beginPath();
-      context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
-      context.lineWidth = 15;
-
-      // line color
-      context.strokeStyle = 'black';
-      context.stroke();
+        var can = document.getElementById('myCanvas');
+        var ctx = can.getContext('2d');
+        
+        ctx.translate(50,50); // just to get it away from the edge
+        
+        
+        var greenPart = ctx.createLinearGradient(0,0,0,100);
+        greenPart.addColorStop(0, 'palegreen');
+        greenPart.addColorStop(1, 'lightgray');
+        
+        var whitePart = ctx.createLinearGradient(0,0,0,100);
+        whitePart.addColorStop(0, 'white');
+        whitePart.addColorStop(1, 'lightgray');
+        
+        
+        var width = 20;
+        ctx.lineWidth = width;
+        
+        // First we make a clipping region for the left half
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(-width, -width, 50+width, 100 + width*2);
+        ctx.clip();
+        
+        // Then we draw the left half
+        ctx.strokeStyle = greenPart;
+        ctx.beginPath();
+        ctx.arc(50,50,50,0,Math.PI*2, false);
+        ctx.stroke();
+        
+        ctx.restore(); // restore clipping region to default
+        
+        // Then we make a clipping region for the right half
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(50, -width, 50+width, 100 + width*2);
+        ctx.clip();
+        
+        // Then we draw the right half
+        ctx.strokeStyle = whitePart;
+        ctx.beginPath();
+        ctx.arc(50,50,50,0,Math.PI*2, false);
+        ctx.stroke();
+        
+        ctx.restore(); // restore clipping region to default
     </script>
-  </body>
+</body>
 </html>
