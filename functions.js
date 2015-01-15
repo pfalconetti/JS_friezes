@@ -1,62 +1,41 @@
-function dessinerTout() {
-        var can = document.getElementById('myCanvas');
-        var ctx = can.getContext('2d');
-        
-        ctx.translate(50,50); // just to get it away from the edge
+function arcSegment() {
+    
+    // Initialization of the canvas
+    var can = document.getElementById('myCanvas');
+    var ctx = can.getContext('2d');
+    
+    // Parameters for the segments
+    // Segments layout
+    var segRadialSubs = 8; // Number of radial subdivisions, strictly positive
+    var segRadiusMax = 150; // Max radius for all segments: they'll be displayed in a zone of segRadiusMax*2 per segRadiusMax*2 pixels
+    var segRadialWidth = segRadiusMax/segRadialSubs;
+    var segWidthProportion = 2; // Segment width, in number of radial subdivisions, stricly positive
+    var segWidth = segRadialWidth*segWidthProportion;
+    // Segments common center
+    var segCenterX = 200;
+    var segCenterY = 200;
+    // Segment individual properties
+    var segLevel = 6; // Starting radial level for drawing the segment
+    var radius = segRadialWidth*segLevel+segWidth/2+0.5;
+    var segGradientRadiusStart = segLevel*segRadialWidth; // Inner border of the segment = starting point for radial gradient
+    var segGradientRadiusEnd = (segLevel+segWidthProportion)*segRadialWidth; // Outer border of the segment = ending point for radial gradient
+    var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd);
+    segment.addColorStop(0,'#f00'); // Inner color for gradient
+    segment.addColorStop(1,'#900'); // Outer color for gradient
+    var segStart = 0.5*Math.PI;
+    var segEnd = 2*Math.PI;
 
-        //var greenPart = ctx.createLinearGradient(0,0,0,100);
-        var greenPart = ctx.createRadialGradient(75,50,5,90,60,100);
-        //greenPart.addColorStop(0, 'palegreen');
-        greenPart.addColorStop(0, 'yellow');
-        greenPart.addColorStop(1, 'red');
+    // Segment width
+    ctx.lineWidth = segWidth;
         
-        var whitePart = ctx.createLinearGradient(0,0,0,100);
-        whitePart.addColorStop(0, 'white');
-        whitePart.addColorStop(1, 'lightgray');
+    // Initializing shadow before final rendering
+    ctx.shadowBlur=20;
+    ctx.shadowColor="black";
         
-        var width = 20;
-        ctx.lineWidth = width;
+    // Drawing
+    ctx.strokeStyle = segment;
+    ctx.beginPath();
+    ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
+    ctx.stroke();
         
-        // First we make a clipping region for the left half
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(-width, -width, 50+width, 100 + width*2);
-        ctx.clip();
-        
-        /* Shadow left */
-        ctx.shadowBlur=20;
-        ctx.shadowColor="black";
-        
-        // Then we draw the left half
-        ctx.strokeStyle = greenPart;
-        ctx.beginPath();
-        ctx.arc(50,50,50,0,Math.PI*2, false);
-        ctx.stroke();
-        
-        ctx.restore(); // restore clipping region to default
-        
-        // Then we make a clipping region for the right half
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(50, -width, 50+width, 100 + width*2);
-        ctx.clip();
-        //ctx.fill();
-        
-        /* Shadow right */
-        //ctx.shadowBlur=20;
-        //ctx.shadowColor="red";
-        ctx.ombre = function(spread,color) {
-            this.shadowBlur=spread;
-            this.shadowColor=color;
-        }
-
-        ctx.ombre(20,"red");
-        
-        // Then we draw the right half
-        ctx.strokeStyle = whitePart;
-        ctx.beginPath();
-        ctx.arc(50,50,50,0,Math.PI*2, false);
-        ctx.stroke();
-        
-        ctx.restore(); // restore clipping region to default
 }
