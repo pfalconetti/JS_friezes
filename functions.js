@@ -30,7 +30,7 @@ function arcSegment() {
     segment.addColorStop(0,'#f00'); // Inner color for gradient
     segment.addColorStop(1,'#900'); // Outer color for gradient
     var segYearStart = 1997;
-    var segYearEnd = 1998;
+    var segYearEnd = 2014;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
 
@@ -43,8 +43,19 @@ function arcSegment() {
         
     // Drawing
     ctx.strokeStyle = segment;
+    // Drawing one continous segmznt
+    /*
     ctx.beginPath();
     ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
     ctx.stroke();
+    */
+    // Drawing multiple successive segments
+    for (i=0; i<(segYearEnd-segYearStart); i++) {
+        ctx.beginPath();
+        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-0.01),false);
+        ctx.stroke();
+    }
+    
+    
         
 }
