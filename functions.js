@@ -41,21 +41,14 @@ function arcSegment() {
     ctx.shadowBlur=20;
     ctx.shadowColor="black";
         
-    // Drawing
-    ctx.strokeStyle = segment;
-    // Drawing one continous segmznt
-    /*
+    // Drawing multiple successive segments separated by years
     ctx.beginPath();
-    ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
-    ctx.stroke();
-    */
-    // Drawing multiple successive segments
     for (i=0; i<(segYearEnd-segYearStart); i++) {
-        ctx.beginPath();
-        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-0.01),false);
-        ctx.stroke();
+        ctx.strokeStyle = segment;
+        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-0.05),false);
+        ctx.strokeStyle = 'rgba(0, 100, 0, 0.1)';
+        ctx.arc(segCenterX,segCenterY,radius,segStart+((i+1)*graphYearAngle-0.04),segStart+((i+1)*graphYearAngle-0.01),false);
     }
-    
-    
+    ctx.stroke();
         
 }
