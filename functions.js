@@ -38,17 +38,22 @@ function arcSegment() {
     ctx.lineWidth = segWidth;
         
     // Initializing shadow before final rendering
-    ctx.shadowBlur=20;
-    ctx.shadowColor="black";
         
     // Drawing multiple successive segments separated by years
-    ctx.beginPath();
     for (i=0; i<(segYearEnd-segYearStart); i++) {
+        ctx.shadowBlur=10;
+        ctx.shadowColor="yellow";
+        ctx.beginPath();
         ctx.strokeStyle = segment;
         ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-0.05),false);
-        ctx.strokeStyle = 'rgba(0, 100, 0, 0.1)';
+        ctx.stroke();
+        ctx.shadowBlur=20;
+        ctx.shadowColor="black";
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(0, 0, 100, 0.5)';
         ctx.arc(segCenterX,segCenterY,radius,segStart+((i+1)*graphYearAngle-0.04),segStart+((i+1)*graphYearAngle-0.01),false);
+        ctx.stroke();
     }
-    ctx.stroke();
-        
+    //ctx.closePath();
+
 }
