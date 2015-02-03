@@ -12,7 +12,7 @@ function arcSegment() {
     var graphYearAngle = (graphSize*Math.PI)/graphYearSubs;
     var graphYearAngleStart = 0.5*Math.PI;
     var graphYearAngleEnd = graphYearAngleStart+graphSize*Math.PI;
-    var graphYearSeparator = 0.02;
+    var graphYearGap = 0.02;
     // Segments layout
     var segRadialSubs = 8; // Number of radial subdivisions, strictly positive
     var segRadiusMax = 150; // Max radius for all segments: they'll be displayed in a zone of segRadiusMax*2 per segRadiusMax*2 pixels
@@ -30,10 +30,12 @@ function arcSegment() {
     var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd);
     segment.addColorStop(0,'#f00'); // Inner color for gradient
     segment.addColorStop(1,'#900'); // Outer color for gradient
-    var segYearStart = 1997;
+    var segYearStart = 1997.5;
     var segYearEnd = 2014;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
+    var shadeStart = graphYearAngleStart;
+    var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap;
     
     // Segment width
     ctx.lineWidth = segWidth;
@@ -42,8 +44,8 @@ function arcSegment() {
     ctx.shadowBlur=20;
     ctx.shadowColor="black";
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(100, 100, 100, 0.2)';
-    ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd-graphYearSeparator,false);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.arc(segCenterX,segCenterY,radius,shadeStart,shadeEnd,false);
     ctx.stroke();
     //ctx.closePath();
     
@@ -52,7 +54,8 @@ function arcSegment() {
     for (i=0; i<(segYearEnd-segYearStart); i++) {
         ctx.beginPath();
         ctx.strokeStyle = segment;
-        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-graphYearSeparator),false);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; /* FIXME PPF */
+        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-graphYearGap),false);
         ctx.stroke();
     }
     //ctx.closePath();
