@@ -33,6 +33,7 @@ function arcSegment() {
     var segYearStart = 1997.5;
     var segYearEnd = 2014;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
+    var segStart2= graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle;
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
     var shadeStart = graphYearAngleStart;
     var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap;
@@ -51,11 +52,18 @@ function arcSegment() {
     
     // Drawing multiple successive segments separated by years (final rendering)
     ctx.shadowBlur=0;
-    for (i=0; i<(segYearEnd-segYearStart); i++) {
+    // First arc, in case it is fractionnal
+    ctx.beginPath();
+    ctx.strokeStyle = segment;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; /* FIXME PPF */
+    ctx.arc(segCenterX,segCenterY,radius,segStart,segStart2-graphYearGap,false);
+    ctx.stroke();
+    // All other arcs
+    for (i=0; i<(segYearEnd-segYearStart-1); i++) {
         ctx.beginPath();
         ctx.strokeStyle = segment;
         ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; /* FIXME PPF */
-        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-graphYearGap),false);
+        ctx.arc(segCenterX,segCenterY,radius,segStart2+(i*graphYearAngle),segStart2+((i+1)*graphYearAngle-graphYearGap),false);
         ctx.stroke();
     }
     //ctx.closePath();
