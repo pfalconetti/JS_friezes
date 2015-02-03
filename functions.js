@@ -30,10 +30,10 @@ function arcSegment() {
     var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd);
     segment.addColorStop(0,'#f00'); // Inner color for gradient
     segment.addColorStop(1,'#900'); // Outer color for gradient
-    var segYearStart = 1997.5;
+    var segYearStart = 1997.5; /* FIXME PPF */
     var segYearEnd = 2014;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
-    var segStart2= graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle;
+    var segStart2= graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; /* FIXME PPF */
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
     var shadeStart = graphYearAngleStart;
     var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap;
