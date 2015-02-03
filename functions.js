@@ -12,6 +12,7 @@ function arcSegment() {
     var graphYearAngle = (graphSize*Math.PI)/graphYearSubs;
     var graphYearAngleStart = 0.5*Math.PI;
     var graphYearAngleEnd = graphYearAngleStart+graphSize*Math.PI;
+    var graphYearSeparator = 0.02;
     // Segments layout
     var segRadialSubs = 8; // Number of radial subdivisions, strictly positive
     var segRadiusMax = 150; // Max radius for all segments: they'll be displayed in a zone of segRadiusMax*2 per segRadiusMax*2 pixels
@@ -33,26 +34,27 @@ function arcSegment() {
     var segYearEnd = 2014;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
-
+    
     // Segment width
     ctx.lineWidth = segWidth;
         
-    // Drawing shadow before final rendering
+    // Drawing shadow for the complete length, before individual and final renderings
     ctx.shadowBlur=20;
     ctx.shadowColor="black";
     ctx.beginPath();
     ctx.strokeStyle = 'rgba(100, 100, 100, 0.2)';
-    ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd-0.05,false);
+    ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd-graphYearSeparator,false);
     ctx.stroke();
-    ctx.closePath();
+    //ctx.closePath();
     
     // Drawing multiple successive segments separated by years (final rendering)
     ctx.shadowBlur=0;
     for (i=0; i<(segYearEnd-segYearStart); i++) {
         ctx.beginPath();
         ctx.strokeStyle = segment;
-        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-0.05),false);
+        ctx.arc(segCenterX,segCenterY,radius,segStart+(i*graphYearAngle),segStart+((i+1)*graphYearAngle-graphYearSeparator),false);
         ctx.stroke();
     }
+    //ctx.closePath();
 
 }
