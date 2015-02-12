@@ -35,15 +35,15 @@ function arcSegment() {
 
     // Segment individual properties
     var segLevel = 6; // Starting radial level for drawing the segment (= <= segRadialSubs - segWidthProportion)
-
-
-
-    var radius = segRadialWidth*segLevel+segWidth/2+0.5;
-    var segGradientRadiusStart = segLevel*segRadialWidth; // Inner border of the segment = starting point for radial gradient
-    var segGradientRadiusEnd = (segLevel+segWidthProportion)*segRadialWidth; // Outer border of the segment = ending point for radial gradient
-    var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd);
+    var radius = segRadialWidth*segLevel+segWidth/2+0.5; // Radius of an arc, in pixels (NB: "+0.5" is to ensure good aspect and covering)
+    var segGradientRadiusStart = segLevel*segRadialWidth; // Inner border of the segment gradient = starting point for radial gradient
+    var segGradientRadiusEnd = (segLevel+segWidthProportion)*segRadialWidth; // Outer border of the segment gradient = ending point for radial gradient
+    var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd); // Defining coloration method = gradient
     segment.addColorStop(0,'#f00'); // Inner color for gradient
     segment.addColorStop(1,'#900'); // Outer color for gradient
+
+
+
     var segYearStart = 1997.5; /* FIXME PPF */
     var segYearEnd = 2013.5;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
