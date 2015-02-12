@@ -43,7 +43,7 @@ function arcSegment() {
     //segment.addColorStop(1,'#900'); // Outer color for gradient
     segment.addColorStop(0,'#fff'); // Inner color for gradient /* FIXME PPF: temporary colour */
     segment.addColorStop(1,'#fff'); // Outer color for gradient /* FIXME PPF: temporary colour */
-    var segYearStart = 1997.9; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round or too close (due to gap) *
+    var segYearStart = 1997.95; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round or too close (due to gap) *
     var segYearEnd = 2013.0; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round or too close (due to gap) */
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle; // Starting position of the segment
     var segFirstNewYear = graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; // Position of the first new-year-gap encountered by the segment
@@ -69,6 +69,9 @@ function arcSegment() {
     ctx.beginPath();
     ctx.strokeStyle = segment;
     segEnd = segFirstNewYear-graphYearGap;
+    if(segEnd-segStart < 0) { // keeping safe of negative values to prevent 360° of revolution
+        segStart = segEnd;
+    }
     ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
     ctx.stroke();
     // All other intermediary arcs
