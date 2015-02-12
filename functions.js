@@ -41,12 +41,13 @@ function arcSegment() {
     var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd); // Defining coloration method = gradient
     //segment.addColorStop(0,'#f00'); // Inner color for gradient
     //segment.addColorStop(1,'#900'); // Outer color for gradient
-    segment.addColorStop(0,'#fff'); // Inner color for gradient /* FIXME PPF temporary colour */
-    segment.addColorStop(1,'#fff'); // Outer color for gradient /* FIXME PPF temporary colour */
-    var segYearStart = 1997.5; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: low decimal WTF */
-    var segYearEnd = 2013.5; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round */
+    segment.addColorStop(0,'#fff'); // Inner color for gradient /* FIXME PPF: temporary colour */
+    segment.addColorStop(1,'#fff'); // Outer color for gradient /* FIXME PPF: temporary colour */
+    var segYearStart = 1997.8; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */
+    var segYearEnd = 2013.3; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round */
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle; // Starting position of the segment
     var segFirstNewYear = graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; // Position of the first new-year-gap encountered by the segment
+    console.log(segYearStart-graphYearStart);
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle; // Ending position of the segment /* FIXME PPF: not necessary if not used elsewhere */
     var shadeStart = graphYearAngleStart; // Starting position of the combined shadow = starts where the first segment starts
     var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap; // Ending position of the shadow = ends where the last segment ends
@@ -71,24 +72,17 @@ function arcSegment() {
     ctx.arc(segCenterX,segCenterY,radius,segStart,segFirstNewYear-graphYearGap,false);
     ctx.stroke();
     // All other intermediary arcs
-    for (i=0; i<(segYearEnd-segYearStart-2); i++) {
+    for (i=0; i<(Math.floor(segYearEnd)-Math.ceil(segYearStart)); i++) {
         ctx.beginPath();
         ctx.strokeStyle = segment;
-        ctx.arc(
-            segCenterX,
-            segCenterY,
-            radius,
-            segFirstNewYear+(i*graphYearAngle),
-            segFirstNewYear+((i+1)*graphYearAngle-graphYearGap),
-            false
-        );
+        ctx.arc(segCenterX,segCenterY,radius,segFirstNewYear+(i*graphYearAngle),segFirstNewYear+((i+1)*graphYearAngle-graphYearGap),false);
         var segLastNewYear = segFirstNewYear+((i+1)*graphYearAngle);
         ctx.stroke();
     }
     // Last arc, in case it is fractionnal
     ctx.beginPath();
     ctx.strokeStyle = segment;
-    ctx.arc(segCenterX,segCenterY,radius,segLastNewYear,(segYearEnd-Math.floor(segYearEnd))*graphYearAngle-graphYearGap,false);
+    ctx.arc(segCenterX,segCenterY,radius,segLastNewYear,segLastNewYear+(segYearEnd-Math.floor(segYearEnd))*graphYearAngle-graphYearGap,false);
     ctx.stroke();
     //ctx.closePath();
 
