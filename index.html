@@ -16,6 +16,16 @@
     </canvas>
     <script>
         arcSegment();
+        var arc = {"debut":1997, fin:2014};
+        document.write(arc.debut);
+        arc.debut = 1998;
+        document.write(arc.debut);
+        function toto(debut,fin) {
+            this.debut = debut;
+            this.fin = fin;
+        }
+        var titi = new toto(1997,2014);
+        document.write(titi.fin);
     </script>
 </body>
 </html>
