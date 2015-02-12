@@ -47,10 +47,10 @@ function arcSegment() {
     var segYearStart = 1997.5; /* FIXME PPF */
     var segYearEnd = 2013.5;
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle;
-    var segStart2= graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; /* FIXME PPF */
+    var segFirstNewYear= graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; /* FIXME PPF */
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
-    var shadeStart = graphYearAngleStart;
-    var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap;
+    var shadeStart = graphYearAngleStart; // Starting position of the combined shadow = starts where the first segment starts
+    var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap; // Ending position of the shadow = ends where the last segment ends
     
     // Segment width
     ctx.lineWidth = segWidth;
@@ -70,14 +70,14 @@ function arcSegment() {
     ctx.beginPath();
     ctx.strokeStyle = segment;
     ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; /* FIXME PPF */
-    ctx.arc(segCenterX,segCenterY,radius,segStart,segStart2-graphYearGap,false);
+    ctx.arc(segCenterX,segCenterY,radius,segStart,segFirstNewYear-graphYearGap,false);
     ctx.stroke();
     // All other arcs
     for (i=0; i<(segYearEnd-segYearStart-1); i++) {
         ctx.beginPath();
         ctx.strokeStyle = segment;
         ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; /* FIXME PPF */
-        ctx.arc(segCenterX,segCenterY,radius,segStart2+(i*graphYearAngle),segStart2+((i+1)*graphYearAngle-graphYearGap),false);
+        ctx.arc(segCenterX,segCenterY,radius,segFirstNewYear+(i*graphYearAngle),segFirstNewYear+((i+1)*graphYearAngle-graphYearGap),false);
         ctx.stroke();
     }
     //ctx.closePath();
