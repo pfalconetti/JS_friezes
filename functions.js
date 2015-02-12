@@ -39,12 +39,12 @@ function arcSegment() {
     var segGradientRadiusStart = segLevel*segRadialWidth; // Inner border of the segment gradient = starting point for radial gradient
     var segGradientRadiusEnd = (segLevel+segWidthProportion)*segRadialWidth; // Outer border of the segment gradient = ending point for radial gradient
     var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd); // Defining coloration method = gradient
-    //segment.addColorStop(0,'#f00'); // Inner color for gradient
-    //segment.addColorStop(1,'#900'); // Outer color for gradient
-    segment.addColorStop(0,'#fff'); // Inner color for gradient /* FIXME PPF: temporary colour */
-    segment.addColorStop(1,'#fff'); // Outer color for gradient /* FIXME PPF: temporary colour */
-    var segYearStart = 1997.95; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round or too close (due to gap) *
-    var segYearEnd = 2013.0; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round or too close (due to gap) */
+    var colorLight = 'f00';
+    var colorDark = colorLuminance(colorLight,-0.4);
+    segment.addColorStop(0,'#'+colorLight); // Inner color for gradient
+    segment.addColorStop(1,colorDark); // Outer color for gradient
+    var segYearStart = 1997.5; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */
+    var segYearEnd = 2013.5; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle; // Starting position of the segment
     var segFirstNewYear = graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; // Position of the first new-year-gap encountered by the segment
     var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle; // Ending position of the segment
@@ -95,4 +95,22 @@ function arcSegment() {
     ctx.stroke();
     //ctx.closePath();
 
+}
+
+function colorLuminance(hex, lum) {
+    // Found at http://www.sitepoint.com/javascript-generate-lighter-darker-color/
+	// Validate hex string
+	hex = String(hex).replace(/[^0-9a-f]/gi, '');
+	if (hex.length < 6) {
+		hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+	}
+	lum = lum || 0;
+	// Convert to decimal and change luminosity
+	var rgb = "#", c, i;
+	for (i = 0; i < 3; i++) {
+		c = parseInt(hex.substr(i*2,2), 16);
+		c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+		rgb += ("00"+c).substr(c.length);
+	}
+	return rgb;
 }
