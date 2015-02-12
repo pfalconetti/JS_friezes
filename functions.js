@@ -43,15 +43,11 @@ function arcSegment() {
     //segment.addColorStop(1,'#900'); // Outer color for gradient
     segment.addColorStop(0,'#fff'); // Inner color for gradient /* FIXME PPF temporary colour */
     segment.addColorStop(1,'#fff'); // Outer color for gradient /* FIXME PPF temporary colour */
-    var segYearStart = 1997.5; // Starting of the segment (fraction is decimal, not base 12) /* FIXME PPF */
-    var segYearEnd = 2013.5; // Ending of the segment (fraction is decimal, not base 12) /* FIXME PPF */
+    var segYearStart = 1997.5; // Starting year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: low decimal WTF */
+    var segYearEnd = 2013.5; // Ending year for the segment /* FIXME PPF: fraction is decimal, not base 12 */ /* FIXME PPF: special case if round */
     var segStart = graphYearAngleStart+(segYearStart-graphYearStart)*graphYearAngle; // Starting position of the segment
     var segFirstNewYear = graphYearAngleStart+(Math.ceil(segYearStart)-graphYearStart)*graphYearAngle; // Position of the first new-year-gap encountered by the segment
-
-
-
-
-    var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle;
+    var segEnd = graphYearAngleStart+(segYearEnd-graphYearStart)*graphYearAngle; // Ending position of the segment /* FIXME PPF: not necessary if not used elsewhere */
     var shadeStart = graphYearAngleStart; // Starting position of the combined shadow = starts where the first segment starts
     var shadeEnd = graphYearAngleStart+(graphYearEnd-graphYearStart)*graphYearAngle-graphYearGap; // Ending position of the shadow = ends where the last segment ends
     
