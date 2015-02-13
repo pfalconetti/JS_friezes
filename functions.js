@@ -1,4 +1,4 @@
-function frieze() {
+function frieze(segCenterX,segCenterY,segRadiusMax) {
     // Angles are expressed in radians.
     // Complete revolution = 360° = 2*Math.PI radians
     // E cardinal point = 0.0*Math.PI radians
@@ -25,13 +25,12 @@ function frieze() {
 
     // Segments layout
     // These parameters define the global aspect of each segment in the graph
-    var segRadiusMax = 150; // Max radius for all segments: they'll be displayed in a zone of segRadiusMax*2 per segRadiusMax*2 pixels
     var segRadialSubs = 8; // Number of radial subdivisions between the center and the outer border of all the graphs, strictly positive
     var segRadialWidth = segRadiusMax/segRadialSubs; // Width (-> thickness) of a single radial subdivision, in pixels
     var segWidthProportion = 2; // Segment width, in number of radial subdivisions, stricly positive
     var segWidth = segRadialWidth*segWidthProportion; // Width (-> thickness) of a segment, in pixels
-    var segCenterX = 200; // Common X coordinate for the center of all the segments, in pixels
-    var segCenterY = 200; // Common Y coordinate for the center of all the segments, in pixels
+    
+    // Legend
 
     // Segment width
     ctx.lineWidth = segWidth;
