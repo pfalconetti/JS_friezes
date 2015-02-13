@@ -16,16 +16,20 @@
     </canvas>
     <script>
         arcSegment();
-        var arc = {"debut":1997, fin:2014};
-        document.write(arc.debut);
-        arc.debut = 1998;
-        document.write(arc.debut);
+        // définition de l'objet
         function toto(debut,fin) {
+            // propriétés
             this.debut = debut;
             this.fin = fin;
+            // méthodes
+            this.construct = function() {
+                document.write("construct "+debut+" "+fin);
+            };
         }
+        // instanciation
         var titi = new toto(1997,2014);
-        document.write(titi.fin);
+        // appel
+        titi.construct();
     </script>
 </body>
 </html>
