@@ -4,8 +4,8 @@
     <script type="text/javascript" src="functions.js"></script>
     <style>
         canvas {
-            /*background-color:blue;*/
-            /*border:1px solid red;*/
+            background-color:#48464d;
+            border:1px solid lightgrey;
         }
     </style>
 </head>
@@ -15,21 +15,18 @@
         Your browser does not support the HTML5 canvas tag.
     </canvas>
     <script>
-        arcSegment();
-        // définition de l'objet
-        function toto(debut,fin) {
-            // propriétés
-            this.debut = debut;
-            this.fin = fin;
-            // méthodes
-            this.construct = function() {
-                document.write("construct "+debut+" "+fin);
-            };
-        }
-        // instanciation
-        var titi = new toto(1997,2014);
-        // appel
-        titi.construct();
+        var experiences = new frieze();
+        // à mon compte
+        experiences.periode('1999.8', '2002.9', 5, 'ff872f', 1); // Long²
+        experiences.periode('2002.8', '2010'  , 5, 'fed34c', 1); // freelance
+        experiences.periode('2010'  , '2014.9', 5, 'fdf141', 1); // auto-entrepreneur
+        // en tant que salarié
+        experiences.periode('1997'  , '1998'  , 6, 'aab5b8', 0); // J'Annonce
+        experiences.periode('1998'  , '1999.8', 6, 'c57ee2', 1); // divers
+        experiences.periode('2002.8', '2004'  , 6, 'fd6f63', 1); // DAII
+        experiences.periode('2005.4', '2008.5', 6, '66fea7', 1); // Claranet
+        experiences.periode('2008.4', '2009.5', 6, '50dac0', 1); // SES
+        experiences.periode('2009.4', 'now'   , 6, '70cffc', 1); // Agarik
     </script>
 </body>
 </html>
