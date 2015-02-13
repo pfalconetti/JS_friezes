@@ -1,4 +1,4 @@
-function frieze(segCenterX,segCenterY,segRadiusMax) {
+function frieze(segCenterX, segCenterY, segRadiusMax) {
     // Angles are expressed in radians.
     // Complete revolution = 360° = 2*Math.PI radians
     // E cardinal point = 0.0*Math.PI radians
@@ -43,12 +43,12 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
     ctx.shadowColor="black";
     ctx.beginPath();
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-    ctx.arc(segCenterX,segCenterY,radius,shadeStart,shadeEnd,false);
+    ctx.arc(segCenterX, segCenterY, radius, shadeStart, shadeEnd, false);
     ctx.stroke();
     ctx.closePath();
     */
         
-    this.periode = function(yearBegin,yearEnd,level,colour,isShaded) {
+    this.periode = function(yearBegin, yearEnd, level, colour, isShaded) {
         // Starting radial level for drawing the segment (= <= segRadialSubs - segWidthProportion)
         // yearBegin and yearEnd must be dcimals (not base 12)
         if (!yearEnd || yearEnd == "now") {
@@ -59,14 +59,14 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
         var radius = segRadialWidth*level+segWidth/2+0.5; // Radius of an arc, in pixels (NB: "+0.5" is to ensure good aspect and covering)
         var segGradientRadiusStart = level*segRadialWidth; // Inner border of the segment gradient = starting point for radial gradient
         var segGradientRadiusEnd = (level+segWidthProportion)*segRadialWidth; // Outer border of the segment gradient = ending point for radial gradient
-        var segment = ctx.createRadialGradient(segCenterX,segCenterY,segGradientRadiusStart,segCenterX,segCenterY,segGradientRadiusEnd); // Defining coloration method = gradient
+        var segment = ctx.createRadialGradient(segCenterX, segCenterY, segGradientRadiusStart, segCenterX, segCenterY, segGradientRadiusEnd); // Defining coloration method = gradient
         var colorLight = '#'+colour;
-        var colorDark = colorLuminance(colour,-0.3);
-        segment.addColorStop(0,colorLight); // Inner color for gradient
+        var colorDark = colorLuminance(colour, -0.3);
+        segment.addColorStop(0, colorLight); // Inner color for gradient
         if (isShaded) { // Outer color for gradient
-            segment.addColorStop(1,colorDark);
+            segment.addColorStop(1, colorDark);
         } else {
-            segment.addColorStop(1,colorLight);
+            segment.addColorStop(1, colorLight);
         }
         var segStart = graphYearAngleStart+(yearBegin-graphYearStart)*graphYearAngle; // Starting position of the segment
         var segFirstNewYear = graphYearAngleStart+(Math.ceil(yearBegin)-graphYearStart)*graphYearAngle; // Position of the first new-year-gap encountered by the segment
@@ -76,8 +76,8 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
         ctx.shadowBlur=20;
         ctx.shadowColor="black";
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(32,32,32,0.2)';
-        ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
+        ctx.strokeStyle = 'rgba(32, 32, 32, 0.2)';
+        ctx.arc(segCenterX, segCenterY, radius, segStart, segEnd, false);
         ctx.stroke();
         ctx.closePath();
         
@@ -90,7 +90,7 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
         if (segEnd-segStart < 0) { // keeping safe of negative values to prevent 360° of revolution
             segStart = segEnd;
         }
-        ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
+        ctx.arc(segCenterX, segCenterY, radius, segStart, segEnd, false);
         ctx.stroke();
         var segLastNewYear = segFirstNewYear;
         // All other intermediary arcs
@@ -99,7 +99,7 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
                 ctx.beginPath();
                 ctx.strokeStyle = segment;
                 segEnd = segFirstNewYear+((i+1)*graphYearAngle-graphYearGap);
-                ctx.arc(segCenterX,segCenterY,radius,segFirstNewYear+(i*graphYearAngle),segEnd,false);
+                ctx.arc(segCenterX, segCenterY, radius, segFirstNewYear+(i*graphYearAngle), segEnd, false);
                 segLastNewYear = segFirstNewYear+((i+1)*graphYearAngle);
                 ctx.stroke();
             }
@@ -112,11 +112,22 @@ function frieze(segCenterX,segCenterY,segRadiusMax) {
         } else {
             segEnd = segLastNewYear+(yearEnd-Math.floor(yearEnd))*graphYearAngle-graphYearGap;
         }
-        ctx.arc(segCenterX,segCenterY,radius,segLastNewYear,segEnd,false);
+        ctx.arc(segCenterX, segCenterY, radius, segLastNewYear, segEnd, false);
         ctx.stroke();
         ctx.closePath();
         
     } // end of method "periode()"
+    
+    this.legendYears = function(step) {
+        /* FIXME PPF: vérifier les cas pour intervalles courts */
+        console.log(graphYearStart);
+        for (i=graphYearStart+1; i<graphYearEnd; i++) {
+            if (i%step == 0) {
+                console.log(i);
+            }
+        }
+        console.log(graphYearEnd);
+    } // end of method "legendYears()"
 
 }
 
