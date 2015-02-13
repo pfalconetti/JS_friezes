@@ -21,7 +21,7 @@ function frieze() {
     var graphSize = 1.9*Math.PI; // Total length of the graph (2*Math.PI = complete revolution), in radians
     var graphYearAngleEnd = graphYearAngleStart+graphSize; // Position where we end drawing the graph, in radians
     var graphYearAngle = graphSize/graphYearSubs; // Angle occupied by one single year (-> distance between two markings-gaps), in radians
-    var graphYearGap = 0.01; // Angle of the gap used to show the beginning/ending of a year (-> size of each marking), in radians
+    var graphYearGap = 0.01; // Angle of the gap used to show the beginning/ending of a year (-> size of each marking), in radians /* FIXME PPF: pas très propre! */
 
     // Segments layout
     // These parameters define the global aspect of each segment in the graph
@@ -77,7 +77,7 @@ function frieze() {
         ctx.shadowBlur=20;
         ctx.shadowColor="black";
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.strokeStyle = 'rgba(32,32,32,0.2)';
         ctx.arc(segCenterX,segCenterY,radius,segStart,segEnd,false);
         ctx.stroke();
         ctx.closePath();
