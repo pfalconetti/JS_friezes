@@ -1,4 +1,4 @@
-function frieze(centerX, centerY, radiusMax, newYearGap) {
+function frieze(centerX, centerY, radiusMax, newYearGap, doShadow) {
     // Angles are expressed in radians.
     // Complete revolution = 360° = 2*Math.PI radians
     // E cardinal point = 0.0*Math.PI radians
@@ -74,13 +74,15 @@ function frieze(centerX, centerY, radiusMax, newYearGap) {
         var segEnd = graphYearAngleStart+(yearEnd-graphYearStart)*graphYearAngle; // Ending position of the segment
 
         // Drop shadow
-        ctx.shadowBlur=20;
-        ctx.shadowColor="black";
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(32, 32, 32, 0.4)';
-        ctx.arc(centerX, centerY, radius, segStart, segEnd, false);
-        ctx.stroke();
-        ctx.closePath();
+        if (doShadow) {
+            ctx.shadowBlur=20;
+            ctx.shadowColor="black";
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(32, 32, 32, 0.4)';
+            ctx.arc(centerX, centerY, radius, segStart, segEnd, false);
+            ctx.stroke();
+            ctx.closePath();
+        }
         
         // Drawing multiple successive segments separated by years (final rendering)
         ctx.shadowBlur=0;
