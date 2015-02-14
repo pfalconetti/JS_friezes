@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" height="400px" width="800px">
+    <canvas id="myCanvas" height="500px" width="800px">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
     <script>
@@ -39,13 +39,27 @@
         experiences.legendYears(5, 25);
 
         // Types de contrats
-        var contrat = new frieze('ctx', 500, 100, 50, 0, 0);
+        var contrats = new frieze('ctx', 525, 100, 50, 0, 0);
         // à mon compte
-        contrat.periode('1999.8', '2014.9', 5, '6e6261', 0);
+        contrats.periode('1999.8', '2014.9', 5, '6e6261', 0);
         // en tant que salarié
-        contrat.periode('1997'  , '1999.8', 6, '968784', 0);
-        contrat.periode('2002.8', '2004'  , 6, '968784', 0);
-        contrat.periode('2005.4', 'now',    6, '968784', 0);
+        contrats.periode('1997'  , '1999.8', 6, '968784', 0);
+        contrats.periode('2002.8', '2004'  , 6, '968784', 0);
+        contrats.periode('2005.4', 'now',    6, '968784', 0);
+
+        // Types de contrats
+        var missions = new frieze('ctx', 500, 300, 100, 0.01, 1);
+        // à mon compte
+        missions.periode('1999.8', '2002.9', 5, 'c57ee2', 0);
+        missions.periode('2002.8', '2010'  , 5, '3290d0', 1);
+        missions.periode('2010'  , '2014.9', 5, 'c57ee2', 0);
+        // en tant que salarié
+        missions.periode('1997'  , '1998'  , 6, 'ababab', 0);
+        missions.periode('1998'  , '1999.8', 6, '709fc0', 0);
+        missions.periode('2002.8', '2004'  , 6, '3290d0', 0);
+        missions.periode('2005.4', '2008.5', 6, 'ababab', 0);
+        missions.periode('2008.4', '2009.5', 6, 'db5b68', 0);
+        missions.periode('2009.4', 'now'   , 6, 'c57ee2', 0);
 
     </script>
 </body>
