@@ -1,4 +1,5 @@
-function frieze(centerX, centerY, radiusMax, newYearGap, doShadow) {
+function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
+    console.log(context); /* FIXME PPF: ce serait mieux si on pouveait passer le contexte en paramètre! */
     // Angles are expressed in radians.
     // Complete revolution = 360° = 2*Math.PI radians
     // E cardinal point = 0.0*Math.PI radians
@@ -10,8 +11,8 @@ function frieze(centerX, centerY, radiusMax, newYearGap, doShadow) {
     // newYearGap = angle of the gap used to show the beginning/ending of a year (-> size of each marking), in radians
     
     // Standard initialization of the canvas
-    var can = document.getElementById('myCanvas');
-    var ctx = can.getContext('2d');
+    //var can = document.getElementById('myCanvas');
+    //var ctx = can.getContext('2d');
 
     // Parameters for the frieze
     // These parameters define the global aspect of the graph where the segments will be drawn

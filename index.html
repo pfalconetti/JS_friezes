@@ -12,11 +12,17 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" height="400px" width="400px">
+    <canvas id="myCanvas" height="400px" width="800px">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
     <script>
-        var experiences = new frieze(200, 200, 150, 0.01, 1);
+
+        // Standard initialization of the canvas
+        var can = document.getElementById('myCanvas');
+        var ctx = can.getContext('2d');
+
+        // Expériences professionnelles
+        var experiences = new frieze('ctx', 200, 200, 150, 0.01, 1);
         // à mon compte
         experiences.periode('1999.8', '2002.9', 5, 'ff872f', 1); // Long²
         experiences.periode('2002.8', '2010'  , 5, 'fed34c', 1); // freelance
@@ -31,6 +37,16 @@
         experiences.periode('2009.4', 'now'   , 6, '70cffc', 1); // Agarik
         // affichage de la légende
         experiences.legendYears(5, 25);
+
+        // Types de contrats
+        var contrat = new frieze('ctx', 500, 100, 50, 0, 0);
+        // à mon compte
+        contrat.periode('1999.8', '2014.9', 5, '6e6261', 0);
+        // en tant que salarié
+        contrat.periode('1997'  , '1999.8', 6, '968784', 0);
+        contrat.periode('2002.8', '2004'  , 6, '968784', 0);
+        contrat.periode('2005.4', 'now',    6, '968784', 0);
+
     </script>
 </body>
 </html>
