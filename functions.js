@@ -77,7 +77,7 @@ function frieze(segCenterX, segCenterY, segRadiusMax) {
         ctx.shadowBlur=20;
         ctx.shadowColor="black";
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(32, 32, 32, 0.2)';
+        ctx.strokeStyle = 'rgba(32, 32, 32, 0.4)';
         ctx.arc(segCenterX, segCenterY, radius, segStart, segEnd, false);
         ctx.stroke();
         ctx.closePath();
