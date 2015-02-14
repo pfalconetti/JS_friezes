@@ -14,8 +14,9 @@ function frieze(segCenterX, segCenterY, segRadiusMax) {
     
     // Parameters for the segments
     // These parameters define the global aspect of the graph where the segments will be drawn
+    var theDate = new Date();
     var graphYearStart = 1997; // Starting year of the first segment
-    var graphYearEnd = 2015; // Ending year for the last segment, must be superior to graphYearStart
+    var graphYearEnd = theDate.getFullYear(); // Ending year for the last segment, must be superior to graphYearStart
     var graphYearSubs = graphYearEnd-graphYearStart+1; // Markings between the starting year and the ending year (= number of years + 1), at least 2
     var graphYearAngleStart = 0.5*Math.PI; // Position where we start drawing the graph (0.5*Math.PI = S cardinal point), in radians
     var graphSize = 1.9*Math.PI; // Total length of the graph (2*Math.PI = complete revolution), in radians
@@ -52,7 +53,7 @@ function frieze(segCenterX, segCenterY, segRadiusMax) {
         // Starting radial level for drawing the segment (= <= segRadialSubs - segWidthProportion)
         // yearBegin and yearEnd must be dcimals (not base 12)
         if (!yearEnd || yearEnd == "now") {
-            yearEnd = dateToDecimal().toFixed(2);
+            yearEnd = dateToDecimal(theDate).toFixed(2);
         }
         
         // Segment individual properties
@@ -154,8 +155,7 @@ function colorLuminance(hex,lum) {
 	return rgb;
 }
 
-function dateToDecimal() {
-    var ladate = new Date();
-    var result = ladate.getFullYear() + ((ladate.getMonth()+1)/12) + (ladate.getDate()/31/12);
+function dateToDecimal(theDate) {
+    var result = theDate.getFullYear() + ((theDate.getMonth()+1)/12) + (theDate.getDate()/31/12);
     return result;
 }
