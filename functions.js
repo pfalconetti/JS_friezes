@@ -118,15 +118,29 @@ function frieze(segCenterX, segCenterY, segRadiusMax) {
         
     } // end of method "periode()"
     
-    this.legendYears = function(step) {
-        /* FIXME PPF: vérifier les cas pour intervalles courts */
-        console.log(graphYearStart);
-        for (i=graphYearStart+1; i<graphYearEnd; i++) {
-            if (i%step == 0) {
-                console.log(i);
+    this.legendYears = function(step, margin) {
+        // Parameters and initialization
+        var i = 0; // Counter
+        var moveX = -10;
+        var moveY = 3;
+        //ctx.font = "20px Arial";
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        // Year markings (legend)
+        var legendPosX = segCenterX+Math.cos(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveX;
+        var legendPosY = segCenterY+Math.sin(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveY;
+        ctx.fillText(graphYearStart, legendPosX, legendPosY);
+        for (year=graphYearStart+1; year<graphYearEnd; year++) {
+            i++;
+            if (year%step == 0) {
+                legendPosX = segCenterX+Math.cos(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveX;
+                legendPosY = segCenterY+Math.sin(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveY;
+                ctx.fillText(year, legendPosX, legendPosY);
             }
         }
-        console.log(graphYearEnd);
+        i++
+        legendPosX = segCenterX+Math.cos(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveX;
+        legendPosY = segCenterY+Math.sin(graphYearAngleStart+i*graphYearAngle)*(segRadiusMax+margin)+moveY;
+        ctx.fillText(graphYearEnd, legendPosX, legendPosY);
     } // end of method "legendYears()"
 
 }
