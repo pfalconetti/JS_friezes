@@ -1,5 +1,5 @@
-function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
-    console.log(context); /* FIXME PPF: ce serait mieux si on pouveait passer le contexte en paramètre! */
+function frieze(context, title, centerX, centerY, radiusMax, newYearGap, doShadow) {
+    //console.log(context); /* FIXME PPF: ce serait mieux si on pouveait passer le contexte en paramètre! */
     // Angles are expressed in radians.
     // Complete revolution = 360° = 2*Math.PI radians
     // E cardinal point = 0.0*Math.PI radians
@@ -13,7 +13,7 @@ function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
     // Standard initialization of the canvas
     //var can = document.getElementById('myCanvas');
     //var ctx = can.getContext('2d');
-
+    
     // Parameters for the frieze
     // These parameters define the global aspect of the graph where the segments will be drawn
     var theDate = new Date();
@@ -35,7 +35,7 @@ function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
     // Segment width
     ctx.lineWidth = segWidth;
 
-    this.periode = function(yearBegin, yearEnd, level, background, isShaded) {
+    this.periode = function(segTitle, yearBegin, yearEnd, level, background, isShaded) {
         // Starting radial level for drawing the segment (= <= segRadialSubs - segWidthProportion)
         // yearBegin and yearEnd must be dcimals (not base 12)
         if (!yearEnd || yearEnd == "now") {
@@ -117,7 +117,7 @@ function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
         ctx.arc(centerX, centerY, radius, segLastNewYear, segEnd, false);
         ctx.stroke();
         ctx.closePath();
-
+        
     } // end of method "periode()"
     
     this.legendYears = function(step, margin) {
@@ -135,7 +135,7 @@ function frieze(context, centerX, centerY, radiusMax, newYearGap, doShadow) {
             i++;
         }
     } // end of method "legendYears()"
-
+    
 }
 
 function colorLuminance(hex,lum) {

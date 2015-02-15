@@ -24,45 +24,47 @@
         var ctx = can.getContext('2d');
 
         // Expériences professionnelles
-        var experiences = new frieze('ctx', 200, 200, 150, 0.01, 1);
+        var experiences = new frieze('ctx', 'expériences professionnelles', 200, 200, 150, 0.01, 1);
         // à mon compte
-        experiences.periode('1999.8', '2002.9', 5, '#ff872f', 1); // Long²
-        experiences.periode('2002.8', '2010'  , 5, '#fed34c', 1); // freelance
-        experiences.periode('2010'  , '2014.9', 5, '#fdf141', 1); // auto-entrepreneur
-        //experiences.periode('2014.8', 'now'   , 5, 'fed34c', 1); // freelance
+        experiences.periode('EURL Long² studio', '1999.8', '2002.9', 5, '#ff872f', 1);
+        experiences.periode('graphiste freelance', '2002.8', '2010' , 5, '#fed34c', 1);
+        experiences.periode('auto-entrepreneur', '2010', '2014.9', 5, '#fdf141', 1);
+        //experiences.periode('graphiste freelance', '2014.8', 'now' , 5, 'fed34c', 1);
         // en tant que salarié
-        experiences.periode('1997'  , '1998'  , 6, '#aab5b8', 1); // J'Annonce
-        experiences.periode('1998'  , '1999.8', 6, '#c57ee2', 1); // divers
-        experiences.periode('2002.8', '2004'  , 6, '#f84c3d', 1); // DAII
-        experiences.periode('2005.4', '2008.5', 6, '#66fea7', 1); // Claranet
-        experiences.periode('2008.4', '2009.5', 6, '#50dac0', 1); // SES
-        experiences.periode('2009.4', 'now'   , 6, '#70cffc', 1); // Agarik
+        experiences.periode("J'Annonce, grp. Hebdomag", '1997', '1998', 6, '#aab5b8', 1);
+        experiences.periode('intérims divers', '1998', '1999.8', 6, '#c57ee2', 1);
+        //experiences.periode('DAII', '2002.8', '2004' , 6, '#fd6f63', 1);
+        experiences.periode('D.A.I.I.', '2002.8', '2004', 6, '#f84c3d', 1);
+        experiences.periode('Claranet Artful', '2005.4', '2008.5', 6, '#66fea7', 1);
+        experiences.periode('Store Electronic Systems', '2008.4', '2009.5', 6, '#50dac0', 1);
+        experiences.periode('Agarik, grp. Atos-Bull', '2009.4', 'now', 6, '#70cffc', 1);
+        //experiences.periode('peut-être vous', '2015.3', '2015.5', 6, '#fff', 0); /* FIXME PPF: prévoir ce cas! */
         // affichage de la légende
         experiences.legendYears(5, 25);
 
         // Types de contrats
-        var contrats = new frieze('ctx', 525, 100, 50, 0, 0);
+        var contrats = new frieze('ctx', '', 525, 100, 50, 0, 0);
         // à mon compte
-        contrats.periode('1999.8', '2014.9', 5, '#6e6261', 0);
+        contrats.periode('', '1999.8', '2014.9', 5, '#6e6261', 0);
         // en tant que salarié
-        contrats.periode('1997'  , '1999.8', 6, '#968784', 0);
-        contrats.periode('2002.8', '2004'  , 6, '#968784', 0);
-        contrats.periode('2005.4', 'now',    6, '#968784', 0);
+        contrats.periode('', '1997'  , '1999.8', 6, '#968784', 0);
+        contrats.periode('', '2002.8', '2004'  , 6, '#968784', 0);
+        contrats.periode('', '2005.4', 'now',    6, '#968784', 0);
 
         // Types de missions
-        var missions = new frieze('ctx', 500, 300, 100, 0.01, 1);
+        var missions = new frieze('ctx', 'missions', 500, 300, 100, 0.01, 1);
         // à mon compte
-        missions.periode('1999.8', '2002.9', 5, 'stripes2', 0);
-        missions.periode('2002.8', '2010'  , 5, '#3290d0', 1);
-        missions.periode('2010'  , '2014.9', 5, 'stripes2', 0);
+        missions.periode('', '1999.8', '2002.9', 5, 'stripes2', 0);
+        missions.periode('', '2002.8', '2010'  , 5, '#3290d0', 1);
+        missions.periode('', '2010'  , '2014.9', 5, 'stripes2', 0);
         // en tant que salarié
-        missions.periode('1997'  , '1998'  , 6, '#ababab', 0);
-        missions.periode('1998'  , '1999.8', 6, 'stripes1', 0);
-        missions.periode('2002.8', '2004'  , 6, '#3290d0', 0);
-        missions.periode('2005.4', '2008.5', 6, '#ababab', 0);
-        missions.periode('2008.4', '2009.5', 6, '#db5b68', 0);
-        missions.periode('2009.4', '2014'  , 6, 'stripes2', 0);
-        missions.periode('2014'  , 'now'   , 6, '#db5b68', 0);
+        missions.periode('', '1997'  , '1998'  , 6, '#ababab', 0);
+        missions.periode('', '1998'  , '1999.8', 6, 'stripes1', 0);
+        missions.periode('', '2002.8', '2004'  , 6, '#3290d0', 0);
+        missions.periode('', '2005.4', '2008.5', 6, '#ababab', 0);
+        missions.periode('', '2008.4', '2009.5', 6, '#db5b68', 0);
+        missions.periode('', '2009.4', '2014'  , 6, 'stripes2', 0);
+        missions.periode('', '2014'  , 'now'   , 6, '#db5b68', 0);
 
     </script>
 </body>
