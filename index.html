@@ -15,6 +15,8 @@
     <canvas id="myCanvas" height="500px" width="800px">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
+    <img src="stripes1.png" id="stripes1" style="display:none;" />
+    <img src="stripes2.png" id="stripes2" style="display:none;" />
     <script>
 
         // Standard initialization of the canvas
@@ -24,42 +26,42 @@
         // Expériences professionnelles
         var experiences = new frieze('ctx', 200, 200, 150, 0.01, 1);
         // à mon compte
-        experiences.periode('1999.8', '2002.9', 5, 'ff872f', 1); // Long²
-        experiences.periode('2002.8', '2010'  , 5, 'fed34c', 1); // freelance
-        experiences.periode('2010'  , '2014.9', 5, 'fdf141', 1); // auto-entrepreneur
+        experiences.periode('1999.8', '2002.9', 5, '#ff872f', 1); // Long²
+        experiences.periode('2002.8', '2010'  , 5, '#fed34c', 1); // freelance
+        experiences.periode('2010'  , '2014.9', 5, '#fdf141', 1); // auto-entrepreneur
         //experiences.periode('2014.8', 'now'   , 5, 'fed34c', 1); // freelance
         // en tant que salarié
-        experiences.periode('1997'  , '1998'  , 6, 'aab5b8', 1); // J'Annonce
-        experiences.periode('1998'  , '1999.8', 6, 'c57ee2', 1); // divers
-        experiences.periode('2002.8', '2004'  , 6, 'fd6f63', 1); // DAII
-        experiences.periode('2005.4', '2008.5', 6, '66fea7', 1); // Claranet
-        experiences.periode('2008.4', '2009.5', 6, '50dac0', 1); // SES
-        experiences.periode('2009.4', 'now'   , 6, '70cffc', 1); // Agarik
+        experiences.periode('1997'  , '1998'  , 6, '#aab5b8', 1); // J'Annonce
+        experiences.periode('1998'  , '1999.8', 6, '#c57ee2', 1); // divers
+        experiences.periode('2002.8', '2004'  , 6, '#fd6f63', 1); // DAII
+        experiences.periode('2005.4', '2008.5', 6, '#66fea7', 1); // Claranet
+        experiences.periode('2008.4', '2009.5', 6, '#50dac0', 1); // SES
+        experiences.periode('2009.4', 'now'   , 6, '#70cffc', 1); // Agarik
         // affichage de la légende
         experiences.legendYears(5, 25);
 
         // Types de contrats
         var contrats = new frieze('ctx', 525, 100, 50, 0, 0);
         // à mon compte
-        contrats.periode('1999.8', '2014.9', 5, '6e6261', 0);
+        contrats.periode('1999.8', '2014.9', 5, '#6e6261', 0);
         // en tant que salarié
-        contrats.periode('1997'  , '1999.8', 6, '968784', 0);
-        contrats.periode('2002.8', '2004'  , 6, '968784', 0);
-        contrats.periode('2005.4', 'now',    6, '968784', 0);
+        contrats.periode('1997'  , '1999.8', 6, '#968784', 0);
+        contrats.periode('2002.8', '2004'  , 6, '#968784', 0);
+        contrats.periode('2005.4', 'now',    6, '#968784', 0);
 
         // Types de missions
         var missions = new frieze('ctx', 500, 300, 100, 0.01, 1);
         // à mon compte
-        missions.periode('1999.8', '2002.9', 5, 'c57ee2', 0);
-        missions.periode('2002.8', '2010'  , 5, '3290d0', 1);
-        missions.periode('2010'  , '2014.9', 5, 'c57ee2', 0);
+        missions.periode('1999.8', '2002.9', 5, 'stripes2', 0);
+        missions.periode('2002.8', '2010'  , 5, '#3290d0', 1);
+        missions.periode('2010'  , '2014.9', 5, 'stripes2', 0);
         // en tant que salarié
-        missions.periode('1997'  , '1998'  , 6, 'ababab', 0);
-        missions.periode('1998'  , '1999.8', 6, '709fc0', 0);
-        missions.periode('2002.8', '2004'  , 6, '3290d0', 0);
-        missions.periode('2005.4', '2008.5', 6, 'ababab', 0);
-        missions.periode('2008.4', '2009.5', 6, 'db5b68', 0);
-        missions.periode('2009.4', 'now'   , 6, 'c57ee2', 0);
+        missions.periode('1997'  , '1998'  , 6, '#ababab', 0);
+        missions.periode('1998'  , '1999.8', 6, 'stripes1', 0);
+        missions.periode('2002.8', '2004'  , 6, '#3290d0', 0);
+        missions.periode('2005.4', '2008.5', 6, '#ababab', 0);
+        missions.periode('2008.4', '2009.5', 6, '#db5b68', 0);
+        missions.periode('2009.4', 'now'   , 6, 'stripes2', 0);
 
     </script>
 </body>
