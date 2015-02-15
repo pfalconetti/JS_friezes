@@ -2,9 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script type="text/javascript" src="svg.js"></script>
     <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript" src="customshapes.js"></script>
     <style>
-        canvas {
+        canvas,
+        #svgcanvas {
             background-color:#48464d;
             border:1px solid lightgrey;
         }
@@ -12,13 +15,21 @@
 </head>
 
 <body>
+    <div id="svgcanvas"></div>
     <canvas id="myCanvas" height="500px" width="800px">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
     <img src="stripes1.png" id="stripes1" style="display:none;" />
     <img src="stripes2.png" id="stripes2" style="display:none;" />
     <script>
+        // SVG space
 
+        //var draw = SVG('svgcanvas').size(300, 300); /* FIXME PPF: WTF largeur ?? */
+        //var rect = draw.rect(100, 100).attr({ fill: '#f06' });
+        var draw = SVG('drawing').size(800, 800).path("M75,0 L75,118.85 A30,30 0 0 0 640,660.15 L568.5690264688633,781.8607965826662 ").attr({ stroke: '#000', fill: 'none' });
+
+        // CANVAS space
+        
         // Standard initialization of the canvas
         var can = document.getElementById('myCanvas');
         var ctx = can.getContext('2d');
