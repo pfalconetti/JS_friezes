@@ -22,6 +22,15 @@
             //stop.at({ offset: 10, color: '#00f', opacity: 1 })
         })
         var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
+        var x   = 550;
+        var y   = 0;
+        var r1  = 128;
+        var r2  = 80;
+        var e   = r1-r2;
+        var dec1= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r1; // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
+        var dec2= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r2;
+        console.log(dec1);
+        var forme4 = draw.path('M'+x+','+y+'  h-'+e+'  c0,'+dec1+' '+(r1-dec1)+','+r1+' '+r1+','+r1+'  v-'+e+'  c-'+dec2+',0 -'+r2+',-'+(r2-dec2)+' -'+r2+',-'+r2+'  z').attr('fill','#ddf');
     </script>
 </body>
 </html>
