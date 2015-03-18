@@ -14,6 +14,7 @@
     <div id="svgcanvas" style="background-color:#eee;"></div>
     <script>
         var draw = SVG('svgcanvas').size(1000, 1000);
+        /* FIXME PPF: tests de coloration
         var forme1 = draw.path('M100,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#fdd' });
         var forme2 = draw.path('M250,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#dfd' });
         var gradient = draw.gradient('linear', function(stop) {
@@ -25,12 +26,14 @@
             //stop.at({ offset: 10, color: '#00f', opacity: 1 })
         })
         var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
+        */
 
-        var ox  = 200;
-        var oy  = 200;
-        var r1  = 128;
-        var r2  = 80;
+        var ox  = 130;
+        var oy  = 0;
+        var r1  = 130;
+        var r2  = 100;
         var ang = (Math.PI)/2; // FIXME PPF: prendre en compte des angles différents !
+        var ang = (Math.PI)/2 + (Math.PI)/10; // FIXME PPF: prendre en compte des angles différents !
         var e   = r1-r2;
         var dec1= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r1; // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
         var dec2= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r2;
@@ -60,12 +63,12 @@
         console.log('dec1='+dec1+' dec2='+dec2+' r3='+r3+' r4='+r4);
         console.log('ax='+ax+' ay='+ay+' --> OK');
         console.log('bx='+bx+' by='+by+' --> OK: définit le nouveau point 0,0');
-        console.log('cx='+cx+' cy='+cy+' --> OK');
-        console.log('dx='+dx+' dy='+dy+' --> OK');
-        console.log('ex='+ex+' ey='+ey+' --> OK');
-        console.log('fx='+fx+' fy='+fy+' --> OK: définit le nouveau point 0,0');
-        console.log('gx='+gx+' gy='+gy+' --> OK');
-        console.log('hx='+hx+' hy='+hy+' --> OK');
+        console.log('cx='+cx+' cy='+cy+' --> ~{0,71} --> OK');
+        console.log('dx='+dx+' dy='+dy+' --> ~{20,100} --> OK');
+        console.log('ex='+ex+' ey='+ey+' --> ~{90,120}');
+        console.log('fx='+fx+' fy='+fy+' --> ~{100,95}: définit le nouveau point 0,0');
+        console.log('gx='+gx+' gy='+gy+' --> ~{45,75} --> OK');
+        console.log('hx='+hx+' hy='+hy+' --> ~{30,55} --> OK');
         console.log('ix='+ix+' iy='+iy+' --> OK');
         
         var chemin = 'M'+ax+','+ay+'  ';
