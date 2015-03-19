@@ -6,17 +6,18 @@
     <script type="text/javascript" src="functions.js"></script>
     <script type="text/javascript" src="customshapes.js"></script>
     <style>
-        body {margin:0;padding:0;}
+        body {background-color:black;margin:0;padding:0;}
     </style>
 </head>
 
 <body>
     <div id="svgcanvas" style="background-color:#eee;"></div>
+    <div id="container"></div>
     <script>
         var draw = SVG('svgcanvas').size(1000, 1000);
-        /* FIXME PPF: tests de coloration
-        var forme1 = draw.path('M100,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#fdd' });
-        var forme2 = draw.path('M250,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#dfd' });
+        /* FIXME PPF: tests de coloration */
+        //var forme1 = draw.path('M100,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#fdd' });
+        //var forme2 = draw.path('M250,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#dfd' });
         var gradient = draw.gradient('linear', function(stop) {
             stop.at(0, '#f00')
             stop.at(0.5, '#0f0')
@@ -25,18 +26,16 @@
             //stop.at({ offset: 5, color: '#0f0', opacity: 1 })
             //stop.at({ offset: 10, color: '#00f', opacity: 1 })
         })
-        var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
-        */
+        //var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
 
-        var ox  = 130;
+        var ox  = 150;
         var oy  = 0;
         var r1  = 130;
         var r2  = 100;
-        var ang = (Math.PI)/2; // FIXME PPF: prendre en compte des angles différents !
-        var ang = (Math.PI)/2 + (Math.PI)/10; // FIXME PPF: prendre en compte des angles différents !
-        var e   = r1-r2;
-        var dec1= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r1; // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
-        var dec2= (4/3)*((1-Math.cos(Math.PI/4))/Math.sin(Math.PI/4))*r2;
+        var n   = 8; // n>=4
+        var ang = 2*(Math.PI)/n; // FIXME PPF: prendre en compte des angles différents !
+        var dec1= (4/3)*Math.tan(Math.PI/(2*n))*r1; // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
+        var dec2= (4/3)*Math.tan(Math.PI/(2*n))*r2;
         var r3  = Math.sqrt(Math.pow(r1,2)+Math.pow(dec1,2));
         var r4  = Math.sqrt(Math.pow(r2,2)+Math.pow(dec2,2));
 
@@ -46,38 +45,27 @@
         var by  = oy;
         var cx  = ox-r1;
         var cy  = oy+dec1;
-        var dx  = ox+Math.cos((3/2)*Math.PI-ang+Math.atan(r1/dec1))*r3;
-        var dy  = oy-Math.sin((3/2)*Math.PI-ang+Math.atan(r1/dec1))*r3;
+        var dx  = ox+Math.cos(Math.PI-ang+Math.atan(r1/dec1)/(n/2))*r3; // FIXME PPF: formule empirique => la courbure ne semble pas exacte!
+        var dy  = oy+Math.sin(Math.PI-ang+Math.atan(r1/dec1)/(n/2))*r3;
         var ex  = ox-Math.cos(ang)*r1;
         var ey  = oy+Math.sin(ang)*r1;
         var fx  = ox-Math.cos(ang)*r2;
         var fy  = oy+Math.sin(ang)*r2;
-        var gx  = ox+Math.cos((3/2)*Math.PI-ang+Math.atan(r2/dec2))*r4;
-        var gy  = oy-Math.sin((3/2)*Math.PI-ang+Math.atan(r2/dec2))*r4;
+        var gx  = ox+Math.cos(Math.PI-ang+Math.atan(r2/dec2)/(n/2))*r4;
+        var gy  = oy+Math.sin(Math.PI-ang+Math.atan(r2/dec2)/(n/2))*r4;
         var hx  = ox-r2;
         var hy  = oy+dec2;
         var ix  = ox-r2;
         var iy  = oy;
         
-        console.log('ox='+ox+' oy='+oy+' r1='+r1+' r2='+r2+' ang='+(ang*180/Math.PI)+'° --> OK');
-        console.log('dec1='+dec1+' dec2='+dec2+' r3='+r3+' r4='+r4);
-        console.log('ax='+ax+' ay='+ay+' --> OK');
-        console.log('bx='+bx+' by='+by+' --> OK: définit le nouveau point 0,0');
-        console.log('cx='+cx+' cy='+cy+' --> ~{0,71} --> OK');
-        console.log('dx='+dx+' dy='+dy+' --> ~{20,100} --> OK');
-        console.log('ex='+ex+' ey='+ey+' --> ~{90,120}');
-        console.log('fx='+fx+' fy='+fy+' --> ~{100,95}: définit le nouveau point 0,0');
-        console.log('gx='+gx+' gy='+gy+' --> ~{45,75} --> OK');
-        console.log('hx='+hx+' hy='+hy+' --> ~{30,55} --> OK');
-        console.log('ix='+ix+' iy='+iy+' --> OK');
-        
         var chemin = 'M'+ax+','+ay+'  ';
             chemin+= 'h'+(bx-ax)+'  ';
             chemin+= 'c'+(cx-bx)+','+(cy-by)+' '+(dx-bx)+','+(dy-by)+' '+(ex-bx)+','+(ey-by)+'  ';
-            chemin+= 'h'+(fx-ex)+'  v'+(fy-ey)+'  ';
+            chemin+= 'l'+(fx-ex)+','+(fy-ey)+'  ';
             chemin+= 'c'+(gx-fx)+','+(gy-fy)+' '+(hx-fx)+','+(hy-fy)+' '+(ix-fx)+','+(iy-fy)+'  ';
             chemin+= 'z';
-        var forme4 = draw.path(chemin).attr('fill','#ddf');
+        var forme4 = draw.path(chemin).attr('fill','#333');
+        
     </script>
 </body>
 </html>
