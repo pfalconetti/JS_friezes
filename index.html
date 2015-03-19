@@ -31,10 +31,14 @@
         var ox  = 150;
         var oy  = 0;
         var r1  = 130;
-        var r2  = 100;
-        var n   = 8; // n>=4
-        var ang = 2*(Math.PI)/n; // FIXME PPF: prendre en compte des angles différents !
-        var dec1= (4/3)*Math.tan(Math.PI/(2*n))*r1; // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
+        var r2  = 110;
+        var beta= 60; // angle de l'arc de cercle, en degrés
+        var ang = (beta/180)*Math.PI; // angle en radians
+        var n   = Math.PI*(2/ang);
+        // Le décalage du point de contrôle est fonction de l'angle
+        // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
+        // http://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves
+        var dec1= (4/3)*Math.tan(Math.PI/(2*n))*r1;
         var dec2= (4/3)*Math.tan(Math.PI/(2*n))*r2;
         var r3  = Math.sqrt(Math.pow(r1,2)+Math.pow(dec1,2));
         var r4  = Math.sqrt(Math.pow(r2,2)+Math.pow(dec2,2));
