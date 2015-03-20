@@ -28,47 +28,8 @@
         })
         //var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
 
-        var ox  = 150;
-        var oy  = 0;
-        var r1  = 130;
-        var r2  = 110;
-        var beta= 60; // angle de l'arc de cercle, en degrés
-        var ang = (beta/180)*Math.PI; // angle en radians
-        var n   = Math.PI*(2/ang);
-        // Le décalage du point de contrôle est fonction de l'angle
-        // http://commons.wikimedia.org/wiki/File:Circle_and_cubic_bezier.svg
-        // http://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves
-        var dec1= (4/3)*Math.tan(Math.PI/(2*n))*r1;
-        var dec2= (4/3)*Math.tan(Math.PI/(2*n))*r2;
-        var r3  = Math.sqrt(Math.pow(r1,2)+Math.pow(dec1,2));
-        var r4  = Math.sqrt(Math.pow(r2,2)+Math.pow(dec2,2));
-
-        var ax  = ox-r2;
-        var ay  = oy;
-        var bx  = ox-r1;
-        var by  = oy;
-        var cx  = ox-r1;
-        var cy  = oy+dec1;
-        var dx  = ox+Math.cos(Math.PI-ang+Math.atan(r1/dec1)/(n/2))*r3; // FIXME PPF: formule empirique => la courbure ne semble pas exacte!
-        var dy  = oy+Math.sin(Math.PI-ang+Math.atan(r1/dec1)/(n/2))*r3;
-        var ex  = ox-Math.cos(ang)*r1;
-        var ey  = oy+Math.sin(ang)*r1;
-        var fx  = ox-Math.cos(ang)*r2;
-        var fy  = oy+Math.sin(ang)*r2;
-        var gx  = ox+Math.cos(Math.PI-ang+Math.atan(r2/dec2)/(n/2))*r4;
-        var gy  = oy+Math.sin(Math.PI-ang+Math.atan(r2/dec2)/(n/2))*r4;
-        var hx  = ox-r2;
-        var hy  = oy+dec2;
-        var ix  = ox-r2;
-        var iy  = oy;
-        
-        var chemin = 'M'+ax+','+ay+'  ';
-            chemin+= 'h'+(bx-ax)+'  ';
-            chemin+= 'c'+(cx-bx)+','+(cy-by)+' '+(dx-bx)+','+(dy-by)+' '+(ex-bx)+','+(ey-by)+'  ';
-            chemin+= 'l'+(fx-ex)+','+(fy-ey)+'  ';
-            chemin+= 'c'+(gx-fx)+','+(gy-fy)+' '+(hx-fx)+','+(hy-fy)+' '+(ix-fx)+','+(iy-fy)+'  ';
-            chemin+= 'z';
-        var forme4 = draw.path(chemin).attr('fill','#333');
+        var forme4 = draw.path(arcSegPath(150,0,120,20,15)).attr('fill','#333');
+        forme4.rotate(-60,150,0);
         
     </script>
 </body>
