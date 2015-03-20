@@ -1,8 +1,9 @@
-function arcSegPath(Ox, Oy, radius, thickness, angleDeg) {
-    // This function calculates the path of a small circle arc through a Bezier curve.
-    // This little segment will be replicated to make a bigger arc.
+function arcSegPath(radius, angleDeg, thickness) {
+    // This function calculates the path of a small circle arc through a Bézier curve.
+    // The center of the circle is the last position of the SVG point.
+    // This little segment can eventually be replicated to make a bigger arc.
     // The angle must be inferior to a quarter of a circle, otherwise it wouldn't have much sense.
-    // This function returns the SVG path to draw the segment.
+    // This function returns the SVG path to draw the segment and replaces the point at the center of the circle.
     
     // Circular borders
     var radiusOuter = radius+thickness/2;
@@ -27,31 +28,29 @@ function arcSegPath(Ox, Oy, radius, thickness, angleDeg) {
     // The arc is made of 4 summits (a,b,e,f), each summit need a control point to set the curve (h,c,d,g).
     // Summit are rather easy to position starting from the center of the circle.
     // Control points depend on the chosen angle, the distance to the center, and the length of the arc.
-    // There is no exact formula to draw a Bezier curve "circle" with control points: only approximation.
-    var ax = Ox+radiusInner;
-    var ay = Oy;
-    var bx = Ox+radiusOuter;
-    var by = Oy;
-    var cx = Ox+radiusOuter;
-    var cy = Oy+distOuter;
-    var dx = Ox+Math.cos(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
-    var dy = Oy+Math.sin(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
-    var ex = Ox+Math.cos(angleRad)*radiusOuter;
-    var ey = Oy+Math.sin(angleRad)*radiusOuter;
-    var fx = Ox+Math.cos(angleRad)*radiusInner;
-    var fy = Oy+Math.sin(angleRad)*radiusInner;
-    var gx = Ox+Math.cos(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
-    var gy = Oy+Math.sin(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
-    var hx = Ox+radiusInner;
-    var hy = Oy+distInner;
+    // There is no exact formula to draw a Bézier curve "circle" with control points: only approximation.
+    var ax = radiusInner;
+    var bx = radiusOuter;
+    var cx = radiusOuter;
+    var cy = distOuter;
+    var dx = Math.cos(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
+    var dy = Math.sin(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
+    var ex = Math.cos(angleRad)*radiusOuter;
+    var ey = Math.sin(angleRad)*radiusOuter;
+    var fx = Math.cos(angleRad)*radiusInner;
+    var fy = Math.sin(angleRad)*radiusInner;
+    var gx = Math.cos(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
+    var gy = Math.sin(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
+    var hx = radiusInner;
+    var hy = distInner;
     
     // SVG syntax.
-    var svgpath = 'M'+ax+','+ay+'  ';
-        svgpath+= 'h'+(bx-ax)+'  ';
-        svgpath+= 'c'+(cx-bx)+','+(cy-by)+' '+(dx-bx)+','+(dy-by)+' '+(ex-bx)+','+(ey-by)+'  ';
-        svgpath+= 'l'+(fx-ex)+','+(fy-ey)+'  ';
-        svgpath+= 'c'+(gx-fx)+','+(gy-fy)+' '+(hx-fx)+','+(hy-fy)+' '+(ax-fx)+','+(ay-fy)+'  ';
-        svgpath+= 'z';
+    var svgpath = 'm'+ax+',0 ';
+        svgpath+= 'h'+(bx-ax)+' ';
+        svgpath+= 'c'+(cx-bx)+','+cy+' '+(dx-bx)+','+dy+' '+(ex-bx)+','+ey+' ';
+        svgpath+= 'l'+(fx-ex)+','+(fy-ey)+' ';
+        svgpath+= 'c'+(gx-fx)+','+(gy-fy)+' '+(hx-fx)+','+(hy-fy)+' '+(ax-fx)+','+(-fy)+' ';
+        svgpath+= 'm-'+ax+',0 ';
     
     return svgpath;
     
