@@ -12,12 +12,11 @@
 
 <body>
     <div id="svgcanvas" style="background-color:#eee;"></div>
-    <div id="container"></div>
     <script>
-        var draw = SVG('svgcanvas').size(1000, 1000);
+        var draw = SVG('svgcanvas').size(1000,1000);
         /* FIXME PPF: tests de coloration */
         //var forme1 = draw.path('M100,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#fdd' });
-        //var forme2 = draw.path('M250,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr({ fill: '#dfd' });
+        //var forme2 = draw.path('M250,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill','#dfd');
         var gradient = draw.gradient('linear', function(stop) {
             stop.at(0, '#f00')
             stop.at(0.5, '#0f0')
@@ -28,8 +27,12 @@
         })
         //var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
 
-        var forme4 = draw.path(arcSegPath(150,0,120,20,15)).attr('fill','#333');
-        forme4.rotate(-60,150,0);
+        var myPath = 'M120,230 ';
+            myPath+= arcSegPath(120,90,20)+' ';
+            myPath+= arcSegPath(120,30,40)+' ';
+            myPath+= 'z';
+        var forme4 = draw.path(myPath).attr('fill', gradient.fill());
+        //forme4.rotate(60,120,230);
         
     </script>
 </body>
