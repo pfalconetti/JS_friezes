@@ -1,3 +1,16 @@
+function arcPath(Ox, Oy) {
+    // FIXME PPF
+    // This function calculates the path of a circle arc made of multiple arc segments.
+    
+    var svgpath = 'M'+Ox+','+Oy+' ';
+        svgpath+= arcSegPath(120,90,20)+' ';
+        svgpath+= arcSegPath(120,30,40)+' ';
+        svgpath+= 'z';
+        
+    return svgpath;
+
+}
+
 function arcSegPath(radius, angleDeg, thickness) {
     // This function calculates the path of a small circle arc through a Bézier curve.
     // The center of the circle is the last position of the SVG point.
