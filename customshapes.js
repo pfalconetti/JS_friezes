@@ -28,21 +28,21 @@ function arcSegPath(Ox, Oy, radius, thickness, angleDeg) {
     // Summit are rather easy to position starting from the center of the circle.
     // Control points depend on the chosen angle, the distance to the center, and the length of the arc.
     // There is no exact formula to draw a Bezier curve "circle" with control points: only approximation.
-    var ax = Ox-radiusInner;
+    var ax = Ox+radiusInner;
     var ay = Oy;
-    var bx = Ox-radiusOuter;
+    var bx = Ox+radiusOuter;
     var by = Oy;
-    var cx = Ox-radiusOuter;
+    var cx = Ox+radiusOuter;
     var cy = Oy+distOuter;
-    var dx = Ox+Math.cos(Math.PI-angleRad+Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
-    var dy = Oy+Math.sin(Math.PI-angleRad+Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
-    var ex = Ox-Math.cos(angleRad)*radiusOuter;
+    var dx = Ox+Math.cos(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
+    var dy = Oy+Math.sin(angleRad-Math.atan(radiusOuter/distOuter)/(n/2))*radiusCpOuter;
+    var ex = Ox+Math.cos(angleRad)*radiusOuter;
     var ey = Oy+Math.sin(angleRad)*radiusOuter;
-    var fx = Ox-Math.cos(angleRad)*radiusInner;
+    var fx = Ox+Math.cos(angleRad)*radiusInner;
     var fy = Oy+Math.sin(angleRad)*radiusInner;
-    var gx = Ox+Math.cos(Math.PI-angleRad+Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
-    var gy = Oy+Math.sin(Math.PI-angleRad+Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
-    var hx = Ox-radiusInner;
+    var gx = Ox+Math.cos(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
+    var gy = Oy+Math.sin(angleRad-Math.atan(radiusInner/distInner)/(n/2))*radiusCpInner;
+    var hx = Ox+radiusInner;
     var hy = Oy+distInner;
     
     // SVG syntax.
