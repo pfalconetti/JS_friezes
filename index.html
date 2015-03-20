@@ -27,11 +27,7 @@
         })
         //var forme3 = draw.path('M400,0   h-64   c0,70 58,128 128,128   v-64   c-35,0 -64,-29 -64,-64   z').attr('fill', gradient.fill());
 
-        var myPath = 'M120,230 ';
-            myPath+= arcSegPath(120,90,20)+' ';
-            myPath+= arcSegPath(120,30,40)+' ';
-            myPath+= 'z';
-        var forme4 = draw.path(myPath).attr('fill', gradient.fill());
+        var forme4 = draw.path(arcPath(120,230)).attr('fill', gradient.fill());
         //forme4.rotate(60,120,230);
         
     </script>
