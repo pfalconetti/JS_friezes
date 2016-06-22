@@ -21,7 +21,7 @@ function frieze(context, title, centerX, centerY, radiusMax, newYearGap, doShado
     var graphYearEnd = theDate.getFullYear(); // Ending year for the last segment, must be superior to graphYearStart
     var graphYearSubs = graphYearEnd-graphYearStart+1; // Markings between the starting year and the ending year (= number of years + 1), at least 2
     var graphYearAngleStart = 0.5*Math.PI; // Position where we start drawing the graph (0.5*Math.PI = S cardinal point), in radians
-    var graphSize = 1.9*Math.PI; // Total length of the graph (2*Math.PI = complete revolution), in radians
+    var graphSize = 1.85*Math.PI; // Total length of the graph (2*Math.PI = complete revolution), in radians
     var graphYearAngleEnd = graphYearAngleStart+graphSize; // Position where we end drawing the graph, in radians
     var graphYearAngle = graphSize/graphYearSubs; // Angle occupied by one single year (-> distance between two markings-gaps), in radians
 
