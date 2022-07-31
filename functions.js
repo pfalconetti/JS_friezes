@@ -38,9 +38,7 @@ function frieze(context, title, centerX, centerY, radiusMax, newYearGap, doShado
   this.periode = function(segTitle, yearBegin, yearEnd, level, background, isShaded) {
     // Starting radial level for drawing the segment (= <= segRadialSubs - segWidthProportion)
     // yearBegin and yearEnd must be dcimals (not base 12)
-    if (!yearEnd || yearEnd == "now") {
-      yearEnd = dateToDecimal(theDate).toFixed(2);
-    }
+    if (!yearEnd || yearEnd == "now") yearEnd = dateToDecimal(theDate).toFixed(2);
     
     // Segment individual properties
     var radius = segRadialWidth*level+segWidth/2+0.5; // Radius of an arc, in pixels (NB: "+0.5" is to ensure good aspect and covering)
@@ -89,9 +87,7 @@ function frieze(context, title, centerX, centerY, radiusMax, newYearGap, doShado
     ctx.beginPath();
     ctx.strokeStyle = segStyle;
     segEnd = segFirstNewYear-newYearGap;
-    if (segEnd-segStart < 0) { // keeping safe of negative values to prevent 360° of revolution
-      segStart = segEnd;
-    }
+    if (segEnd-segStart < 0) segStart = segEnd; // keeping safe of negative values to prevent 360° of revolution
     ctx.arc(centerX, centerY, radius, segStart, segEnd, false);
     ctx.stroke();
     var segLastNewYear = segFirstNewYear;
@@ -142,9 +138,7 @@ function colorLuminance(hex,lum) {
   // Found at http://www.sitepoint.com/javascript-generate-lighter-darker-color/
   // Validate hex string
   hex = String(hex).replace(/[^0-9a-f]/gi, '');
-  if (hex.length < 6) {
-    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
-  }
+  if (hex.length < 6) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
   lum = lum || 0;
   // Convert to decimal and change luminosity
   var rgb = "#", c, i;
